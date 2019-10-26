@@ -1,11 +1,12 @@
 if Rails.env.production?
   CarrierWave.configure do |config|
-    config.fog_credentials = {
+    Cloudinary.config do |config|
       # Configuration for cloudinary
-      :provider              => 'Cloudinary',
-      :aws_access_key_id     => ENV['C_API_KEY'],
-      :aws_secret_access_key => ENV['C_API_SECRET']
-    }
-    config.fog_directory     =  ENV['C_BUCKET']
+      config.cloud = ENV['C_BUCKET']
+      config.api_key = ENV['C_API_KEY']
+      config.api_secret = ENV['C_API_SECRET']
+      config.secure = ENV['C_SECURE']
+      config.cdn_subdomain = ENV['C_SUB']
+    end    
   end
 end
